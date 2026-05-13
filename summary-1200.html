@@ -19,12 +19,40 @@
 <meta name="twitter:title" content="OGP test - summary / 1200x630">
 <meta name="twitter:description" content="Twitter Card summary + 1200x630 OGP image">
 <meta name="twitter:image" content="https://ccn-ishii-yusuke.github.io/ogp-check/1200x630.png">
+
+<style>
+.share { display: flex; gap: .5em; margin: 1em 0; flex-wrap: wrap; }
+.share a { display: inline-block; padding: .4em .9em; border-radius: 4px; text-decoration: none; color: #fff; font-size: .9em; }
+.share .x { background: #000; }
+.share .fb { background: #1877f2; }
+.share .line { background: #06c755; }
+</style>
 </head>
 <body>
 <h1>OGP test - summary / 1200x630</h1>
 <p>twitter:card = <code>summary</code></p>
 <p>og:image = <code>1200x630.png</code> (1200 x 630)</p>
 <p><img src="1200x630.png" alt="1200x630 preview" width="400"></p>
+
+<h2>Share</h2>
+<div class="share" id="share"></div>
+
 <p><a href="index.html">&larr; index</a></p>
+
+<script>
+(function () {
+  var url = document.querySelector('meta[property="og:url"]').content;
+  var text = document.title;
+  var enc = encodeURIComponent;
+  var links = [
+    ['x',    'X でシェア', 'https://twitter.com/intent/tweet?text=' + enc(text) + '&url=' + enc(url)],
+    ['fb',   'Facebook',   'https://www.facebook.com/sharer/sharer.php?u=' + enc(url)],
+    ['line', 'LINE',       'https://social-plugins.line.me/lineit/share?url=' + enc(url)]
+  ];
+  document.getElementById('share').innerHTML = links.map(function (l) {
+    return '<a class="' + l[0] + '" href="' + l[2] + '" target="_blank" rel="noopener">' + l[1] + '</a>';
+  }).join('');
+})();
+</script>
 </body>
 </html>
